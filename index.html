@@ -1,22 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Primer Sitio en Render - Eduardo</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f0f4f8; color: #333; }
-        h1 { color: #2c3e50; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyecto 2 - Render PaaS | Eduardo - Bogotá 2026</title>
+  <meta name="description" content="Implementación de aplicación web usando Render como Plataforma como Servicio (PaaS). Despliegue rápido, seguro y automático."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #007bff;
+      --primary-dark: #0056b3;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --accent: #00d4ff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 60%);
+      animation: pulse 15s infinite;
+    }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    }
+    .subtitle { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2rem; }
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      margin: 1rem 0.5rem;
+      transition: all 0.3s;
+    }
+    .badge:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,123,255,0.4); }
+    section { padding: 80px 0; }
+    h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      color: var(--accent);
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      width: 80px; height: 4px; background: var(--primary);
+      position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(0,212,255,0.1);
+      transition: all 0.4s ease;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 0.8s forwards;
+    }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .card h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem; }
+    .highlight { color: var(--accent); font-weight: 600; }
+    #demo-btn {
+      display: block;
+      margin: 2rem auto;
+      padding: 16px 40px;
+      font-size: 1.2rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(0,123,255,0.3);
+    }
+    #demo-btn:hover { transform: scale(1.08); box-shadow: 0 15px 40px rgba(0,123,255,0.5); }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      background: #0a0f1a;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+    @media (max-width: 768px) {
+      header { padding: 60px 0 40px; }
+      section { padding: 60px 0; }
+    }
+  </style>
 </head>
 <body>
+
+  <header>
     <div class="container">
-        <h1>¡Proyecto 2 - PaaS Render!</h1>
-        <p>Este sitio está desplegado en Render.com usando PaaS.</p>
-        <p>Fecha: Febrero 2026</p>
-        <p>Alumno: Eduardo - Bogotá, Colombia</p>
-        <p><strong>¡Funciona con HTTPS automático!</strong></p>
+      <h1>Proyecto 2<br><span style="color:var(--accent);">Render PaaS</span></h1>
+      <p class="subtitle">Implementación de aplicación web usando <strong>Render</strong> como Plataforma como Servicio (PaaS)</p>
+      <div>
+        <span class="badge">Despliegue Automático</span>
+        <span class="badge">HTTPS Gratis</span>
+        <span class="badge">CDN Global</span>
+        <span class="badge">GitHub Integration</span>
+      </div>
     </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2>¿Qué es Render PaaS?</h2>
+      <div class="card" style="text-align:center; max-width:800px; margin:0 auto;">
+        <p>Render es una plataforma <span class="highlight">PaaS moderna</span> (Platform as a Service) que permite desplegar aplicaciones web, APIs, bases de datos y más, sin preocuparte por servidores.</p>
+        <p>En 2026 destaca por:</p>
+        <ul style="list-style:none; margin:1.5rem 0; text-align:left; max-width:600px; margin-left:auto; margin-right:auto;">
+          <li>→ Despliegues automáticos desde Git</li>
+          <li>→ HTTPS y certificados TLS automáticos</li>
+          <li>→ CDN global para velocidad extrema</li>
+          <li>→ Soporte para sitios estáticos, web services, Docker, Postgres, Redis...</li>
+          <li>→ Tier gratuito potente (con auto-sleep en inactividad)</li>
+          <li>→ Autoscaling, previews y zero-downtime</li>
+        </ul>
+        <p><strong>Ideal para estudiantes, startups y equipos que quieren velocidad y simplicidad.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0a0f1a;">
+    <div class="container">
+      <h2>Pasos del Proyecto_2_PaaS_Render</h2>
+      <div class="steps">
+        <div class="card">
+          <h3>1. Crear Repositorio en GitHub</h3>
+          <p>Ve a <a href="https://github.com" style="color:var(--accent);">github.com</a><br>Crea un repositorio nuevo (público recomendado).</p>
+        </div>
+        <div class="card">
+          <h3>2. Crear la Aplicación</h3>
+          <p>Crea el archivo <code>index.html</code><br>Escribe tu contenido creativo<br>Sube / commitea al repositorio.</p>
+        </div>
+        <div class="card">
+          <h3>3. Desplegar en Render</h3>
+          <p>Ve a <a href="https://render.com" style="color:var(--accent);">render.com</a><br>→ New → <strong>Static Site</strong><br>Conecta tu repo de GitHub<br>Deploy automático cada push.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2>¡Prueba la magia del despliegue!</h2>
+      <button id="demo-btn">¿Listo para deployar? → Click aquí</button>
+      <p id="demo-text" style="margin-top:1.5rem; font-size:1.3rem; opacity:0.9; min-height:60px;"></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Proyecto realizado por Eduardo • Bogotá D.C., Colombia • Febrero 2026</p>
+    <p>Competencia: Administrar hardware y software de seguridad en la red • Render PaaS</p>
+  </footer>
+
+  <script>
+    const messages = [
+      "¡Despliegue en segundos! 🚀",
+      "HTTPS automático activado 🔒",
+      "Tu app ya está en la nube ☁️",
+      "Git push → Render magic ✨",
+      "¡Proyecto 2 completado! 🎉"
+    ];
+    let index = 0;
+    const btn = document.getElementById('demo-btn');
+    const text = document.getElementById('demo-text');
+
+    btn.addEventListener('click', () => {
+      text.style.opacity = 0;
+      setTimeout(() => {
+        text.textContent = messages[index];
+        text.style.opacity = 1;
+        index = (index + 1) % messages.length;
+      }, 300);
+    });
+  </script>
+
 </body>
 </html>
